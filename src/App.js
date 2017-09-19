@@ -13,7 +13,7 @@ state = {
       "subject": "You can't input the protocol without calculating the mobile RSS protocol!",
       "read": false,
       "starred": true,
-      "labels": ["dev", "personal"]
+      "labels": ["dev", "personal"],
     },
     {
       "id": 2,
@@ -68,11 +68,36 @@ state = {
     }
   ]
 }
+// functions
+// selecting message
+getId = (id) => {
+  return this.state.message.filter(mess => mess.id === id)[0]
+}
+
+checkMessage = (id) => {
+this.getId(id).selected = !this.getId(id).selected
+this.setState({
+  message: this.state.message
+})
+}
+
+// star message
+starMessage = (id) => {
+  this.getId(id).starred = !this.getId(id).starred
+  this.setState({
+    message: this.state.message
+  })
+}
+
+
   render() {
     return (
       <div className="App">
         <Toolbar />
-        <MessageList message= {this.state.message}/>
+        <MessageList
+          message= {this.state.message}
+          checkMessage= {this.checkMessage}
+          starMessage= {this.starMessage}/>
       </div>
     );
   }

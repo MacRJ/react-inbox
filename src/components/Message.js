@@ -8,6 +8,10 @@ const read = props.message.read
 let star = props.message.starred
 let message = props.message.subject
 let labels = props.message.labels
+let select = props.message.selected
+
+console.log('selectedFrom Message', select)
+
 
 // functions
 // selecting labels
@@ -15,19 +19,30 @@ let label = labels.map((indiv, i) => <span className="label label-warning" key={
 // selecting read or not read
 function readSelected() {
 let readVar = (read === true ? "read" : "unread")
-
-return "message row " + readVar
+let selectVar = (select === true ? " selected" : "")
+return "message row " + readVar + selectVar
 }
+// checkbox
+function check() {
+  if(select === true) {
+    return "checked"
+  }
+}
+
 
 return (
   <div className= {readSelected()}   >
     <div className="col-xs-1">
       <div className="row">
         <div className="col-xs-2">
-          <input type="checkbox" />
+          <input
+            type="checkbox"
+            checked= {check()}
+            onChange={(e) => {props.checkMessage(props.id)}}
+            />
         </div>
         <div className="col-xs-2">
-          <i className= {star === true ? "star fa fa-star" : "star fa fa-star-o"}></i>
+          <i className= {star === true ? "star fa fa-star" : "star fa fa-star-o"} onClick= {(e) => {props.starMessage(props.id)}}></i>
         </div>
       </div>
     </div>
