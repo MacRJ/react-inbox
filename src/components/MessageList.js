@@ -6,8 +6,9 @@ import Message from './Message'
 class MessageList extends React.Component {
 
 render(props) {
-console.log('MessageList', props)
+
 const message = this.props.message.map((mess, i) =>
+
 <Message
   key= {i}
   id = {mess.id}
@@ -16,7 +17,6 @@ const message = this.props.message.map((mess, i) =>
   starMessage={this.props.starMessage}/>)
 
 
-    console.log('Messagelist', this.props.message)
     return (
     <div>
       {message}

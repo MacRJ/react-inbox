@@ -69,11 +69,16 @@ state = {
   ]
 }
 // functions
-// selecting message
+// Selecting Individual
 getId = (id) => {
   return this.state.message.filter(mess => mess.id === id)[0]
 }
+// Selecting All
+getAll = () => {
+  return this.state.message
+}
 
+// check single message
 checkMessage = (id) => {
 this.getId(id).selected = !this.getId(id).selected
 this.setState({
@@ -89,11 +94,43 @@ starMessage = (id) => {
   })
 }
 
+// star All messages
+selectAll = () => {
+  let some = this.state.message.some(selected => selected.selected)
+  let every = this.state.message.every(selected => selected.selected)
+  let data = this.state.message
+  console.log('every',every)
+if(every === false){
+  for(var i =0; i < data.length; i++){
+    data[i].selected = true
+    this.setState({
+      data:data
+    })
+  }
+} else if(every === true) {
+for(var i =0; i < data.length; i++){
+  data[i].selected = false
+  this.setState({
+    data:data
+  })
+}
+} else if(some) {
+  for(var i =0; i< data.length; i++){
+    data[i].selected = true
+    this.setState({
+      data:data
+    })
+  }
+}
+}
+
 
   render() {
     return (
       <div className="App">
-        <Toolbar />
+        <Toolbar
+          message={this.state.message}
+          selectAll={this.selectAll}/>
         <MessageList
           message= {this.state.message}
           checkMessage= {this.checkMessage}

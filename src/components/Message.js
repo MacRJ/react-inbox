@@ -3,14 +3,13 @@ import React from 'react'
 
 
 const Message = (props) => {
-console.log('Message', props)
+
 const read = props.message.read
 let star = props.message.starred
 let message = props.message.subject
 let labels = props.message.labels
 let select = props.message.selected
 
-console.log('selectedFrom Message', select)
 
 
 // functions
@@ -22,12 +21,7 @@ let readVar = (read === true ? "read" : "unread")
 let selectVar = (select === true ? " selected" : "")
 return "message row " + readVar + selectVar
 }
-// checkbox
-function check() {
-  if(select === true) {
-    return "checked"
-  }
-}
+
 
 
 return (
@@ -37,7 +31,7 @@ return (
         <div className="col-xs-2">
           <input
             type="checkbox"
-            checked= {check()}
+            checked= {select === true ? "checked" : ""}
             onChange={(e) => {props.checkMessage(props.id)}}
             />
         </div>
