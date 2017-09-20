@@ -124,13 +124,52 @@ for(var i =0; i < data.length; i++){
 }
 }
 
-
+// Marking as read
+read = () => {
+let data = this.state.message
+for(var i =0; i< data.length; i++){
+  if(data[i].selected === true){
+    data[i].read = true
+    this.setState({
+      data:data
+    })
+  }
+}
+}
+// Marking Unread
+unRead = () => {
+let data = this.state.message
+for(var i =0; i< data.length; i++){
+  if(data[i].selected === true){
+    data[i].read = false
+    this.setState({
+      data:data
+    })
+  }
+}
+}
+// delete
+trash = () => {
+  console.log('trash')
+  let data = this.state.message
+  for(var i =0; i< data.length; i++){
+    if(data[i].selected === true){
+      data.splice(data[i], 1)
+      this.setState({
+        data:data
+      })
+    }
+}
+}
   render() {
     return (
       <div className="App">
         <Toolbar
           message={this.state.message}
-          selectAll={this.selectAll}/>
+          selectAll={this.selectAll}
+          read={this.read}
+          unRead={this.unRead}
+          trash={this.trash}/>
         <MessageList
           message= {this.state.message}
           checkMessage= {this.checkMessage}

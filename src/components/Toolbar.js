@@ -3,7 +3,6 @@ import React from 'react'
 class Toolbar extends React.Component {
 
 render(props) {
-console.log('toolbar', this.props)
 // if any message is selected
 function ifSelected(props) {
   let selected = props.find(selected => selected.selected === true)
@@ -39,11 +38,13 @@ if(every === true){
         onClick={(e) => {this.props.selectAll()}}></i>
     </button>
 
-    <button className="btn btn-default">
+    <button className="btn btn-default"
+      onClick={(e) => {this.props.read()}}>
       Mark As Read
     </button>
 
-    <button className="btn btn-default">
+    <button className="btn btn-default"
+      onClick={(e) => {this.props.unRead()}}>
       Mark As Unread
     </button>
 
@@ -62,7 +63,8 @@ if(every === true){
     </select>
 
     <button className="btn btn-default">
-      <i className="fa fa-trash-o"></i>
+      <i className="fa fa-trash-o"
+        onClick={(e) => {this.props.trash()}}></i>
     </button>
   </div>
 </div>
