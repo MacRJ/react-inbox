@@ -78,6 +78,19 @@ getAll = () => {
   return this.state.message
 }
 
+// Unread count
+count = () => {
+let data = this.state.message
+let count = 0;
+for(var i =0; i< data.length; i++){
+if(data[i].read === false){
+  count = count +1
+}
+}
+  return count
+}
+
+
 // check single message
 checkMessage = (id) => {
 this.getId(id).selected = !this.getId(id).selected
@@ -94,7 +107,7 @@ starMessage = (id) => {
   })
 }
 
-// star All messages
+// Select All messages
 selectAll = () => {
   let some = this.state.message.some(selected => selected.selected)
   let every = this.state.message.every(selected => selected.selected)
@@ -150,7 +163,6 @@ for(var i =0; i< data.length; i++){
 }
 // delete
 trash = () => {
-  console.log('trash')
   let data = this.state.message
   for(var i =0; i< data.length; i++){
     if(data[i].selected === true){
@@ -161,6 +173,37 @@ trash = () => {
     }
 }
 }
+// changing label
+label = (prop) => {
+let data = this.state.message
+for(var i =0; i< data.length; i++){
+  if(data[i].selected === true){
+    if(!data[i].labels.includes(prop)){
+      data[i].labels.splice(1,0, prop)
+      this.setState({
+        data:data
+      })
+    }
+    }
+    }
+}
+// removing label
+unLabel = (prop) => {
+  let data = this.state.message
+  for(var i =0; i< data.length; i++){
+    if(data[i].selected === true)
+      if(data[i].labels.includes(prop)){
+        let selecFor = data[i].labels.filter(lab => lab !== prop)
+        console.log('selecFor', selecFor)
+          data[i].labels = [];
+          data[i].labels = selecFor
+          this.setState({
+            data:data
+          })
+      }
+}
+}
+
   render() {
     return (
       <div className="App">
@@ -169,7 +212,10 @@ trash = () => {
           selectAll={this.selectAll}
           read={this.read}
           unRead={this.unRead}
-          trash={this.trash}/>
+          trash={this.trash}
+          count={this.count}
+          label={this.label}
+          unLabel={this.unLabel}/>
         <MessageList
           message= {this.state.message}
           checkMessage= {this.checkMessage}

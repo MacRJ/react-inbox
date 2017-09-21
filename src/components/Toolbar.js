@@ -29,7 +29,7 @@ if(every === true){
     <div className="row toolbar">
   <div className="col-md-12">
     <p className="pull-right">
-      <span className="badge badge">2</span>
+      <span className="badge badge">{this.props.count()}</span>
       unread messages
     </p>
 
@@ -48,14 +48,14 @@ if(every === true){
       Mark As Unread
     </button>
 
-    <select className="form-control label-select">
+    <select className="form-control label-select" id="selector" onChange={(e) => {this.props.label(e.target.value)}}>
       <option>Apply label</option>
       <option value="dev">dev</option>
       <option value="personal">personal</option>
       <option value="gschool">gschool</option>
     </select>
 
-    <select className="form-control label-select">
+    <select className="form-control label-select" onChange={(e) => {this.props.unLabel(e.target.value)}}>
       <option>Remove label</option>
       <option value="dev">dev</option>
       <option value="personal">personal</option>
