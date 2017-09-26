@@ -3,6 +3,7 @@ import React from 'react'
 
 
 const Message = (props) => {
+  console.log('MessageProp', this.props)
 
 const read = props.message.read
 let star = props.message.starred

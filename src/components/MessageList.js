@@ -7,15 +7,12 @@ class MessageList extends React.Component {
 
 render(props) {
 
-const message = this.props.message.map((mess, i) =>
+const message = this.props.messages.map((mess, i) =>
 
 <Message
   key= {i}
   id = {mess.id}
-  message= {mess}
-  checkMessage={this.props.checkMessage}
-  starMessage={this.props.starMessage}/>)
-
+  message= {mess}/>)
 
     return (
     <div>
